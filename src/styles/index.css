@@ -1,0 +1,341 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-canvas: #FFFFFF;
+    --card-bg: #FFFFFF;
+    --ink: #0A0A0C;
+    --border-light: #EBEBED;
+    --gold: #D4AF37;
+    --gold-glow: rgba(212, 175, 55, 0.35);
+    --hero-bg: #08080B;
+  }
+
+  body {
+    background-color: #FFFFFF;
+    color: #0A0A0C;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .font-editorial {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .font-cinzel {
+    font-family: 'Cinzel', Georgia, 'Times New Roman', serif;
+  }
+
+  .font-mono-code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* ============================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================ */
+
+@layer utilities {
+
+  /* Fade in */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Pop in */
+  .animate-pop-in {
+    animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.92) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Page loader progress bar */
+  .animate-loader-bar {
+    animation: loaderProgress 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes loaderProgress {
+    0% { width: 0%; }
+    40% { width: 65%; }
+    85% { width: 92%; }
+    100% { width: 100%; }
+  }
+
+  /* Slide up fade — for staggered card entrance */
+  .animate-slide-up {
+    animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Float — for ambient orbs */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-float-slow {
+    animation: float 9s ease-in-out infinite reverse;
+  }
+  .animate-float-med {
+    animation: float 7.5s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33%       { transform: translateY(-18px) translateX(8px); }
+    66%       { transform: translateY(10px) translateX(-6px); }
+  }
+
+  /* Shimmer — for skeleton loaders */
+  .animate-shimmer {
+    background: linear-gradient(90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+  .animate-shimmer-dark {
+    background: linear-gradient(90deg,
+      #1a1a1a 25%,
+      #2a2a2a 50%,
+      #1a1a1a 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Gold glow pulse */
+  .animate-glow-pulse {
+    animation: glowPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.25), 0 0 40px rgba(212, 175, 55, 0.1); }
+    50%       { box-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 0 80px rgba(212, 175, 55, 0.2); }
+  }
+
+  /* Marquee / horizontal ticker */
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+  .animate-marquee-slow {
+    animation: marquee 50s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Stagger delay utilities */
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.10s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.20s; }
+  .stagger-5 { animation-delay: 0.25s; }
+  .stagger-6 { animation-delay: 0.30s; }
+  .stagger-7 { animation-delay: 0.35s; }
+  .stagger-8 { animation-delay: 0.40s; }
+  .stagger-9 { animation-delay: 0.45s; }
+
+  /* Counter reveal */
+  .animate-count-in {
+    animation: countIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes countIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.9); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Ticker dot pulse */
+  .dot-live {
+    animation: livePulse 1.5s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.7); }
+  }
+}
+
+/* ============================================================
+   PRODUCT CARDS
+   ============================================================ */
+
+/* Flat editorial product cards */
+.pro-card {
+  background: #FFFFFF;
+  border: 1.5px solid #EBEBED;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pro-card:hover {
+  border-color: #C49B2A;
+  box-shadow: 0 0 0 1px #D4AF37, 0 8px 32px rgba(212, 175, 55, 0.18), 0 2px 8px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+
+/* ============================================================
+   HERO GRAIN TEXTURE
+   ============================================================ */
+
+.hero-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================================
+   MARQUEE WRAPPER
+   ============================================================ */
+
+.marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--hero-bg), transparent);
+}
+.marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--hero-bg), transparent);
+}
+
+.marquee-wrapper-light::before {
+  background: linear-gradient(to right, #ffffff, transparent);
+}
+.marquee-wrapper-light::after {
+  background: linear-gradient(to left, #ffffff, transparent);
+}
+
+/* ============================================================
+   FILL LEVEL INDICATOR PILL
+   ============================================================ */
+
+.fill-pill {
+  background: #F6F6F7;
+  color: #0A0A0C;
+  border: 1px solid #D3D3D8;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.pro-modal-sheet {
+  background: #FFFFFF;
+  border: 1px solid #EBEBED;
+  box-shadow: 0 25px 50px -12px rgba(10, 10, 12, 0.25);
+}
+
+/* ============================================================
+   POP BUTTON
+   ============================================================ */
+
+.btn-pop {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-pop:active {
+  transform: translate(3px, 3px);
+  box-shadow: none !important;
+}
+
+/* Gold pop variant */
+.btn-gold-pop {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 3px 3px 0 0 rgba(212,175,55,0.8);
+}
+.btn-gold-pop:hover {
+  box-shadow: 4px 4px 0 0 rgba(212,175,55,1);
+}
+.btn-gold-pop:active {
+  transform: translate(3px, 3px);
+  box-shadow: none !important;
+}
+
+/* ============================================================
+   SKELETON LOADER
+   ============================================================ */
+
+.skeleton-card {
+  background: #f0f0f0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F6F6F7; }
+::-webkit-scrollbar-thumb { background: #D3D3D8; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #AFAFB8; }
+
+/* Hide scrollbar for pills row */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================================
+   GOLD GRADIENT TEXT
+   ============================================================ */
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #F5E27A 40%, #C49B2A 70%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   HERO PILL — active glow
+   ============================================================ */
+
+.hero-pill-active {
+  background: linear-gradient(135deg, #D4AF37, #C49B2A);
+  color: #08080B;
+  box-shadow: 0 0 16px rgba(212,175,55,0.4);
+}
+
+.hero-pill {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: all 0.2s ease;
+}
+.hero-pill:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-color: rgba(212,175,55,0.4);
+}
