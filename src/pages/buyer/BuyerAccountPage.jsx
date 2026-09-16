@@ -53,13 +53,13 @@ export default function BuyerAccountPage() {
             />
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-black text-gray-900">{currentUser?.name || 'Vikram Mehta'}</h2>
+                <h2 className="text-xl font-black text-gray-900">{currentUser?.name || 'Verified Member'}</h2>
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase font-mono">
                   48H ESCROW PROTECTED BUYER
                 </span>
               </div>
               <p className="text-xs text-gray-500 font-mono mt-0.5">
-                {currentUser?.email || 'collector@dcltr.in'} • {currentUser?.phone || '+91 98765 43210'}
+                {currentUser?.email || ''} {currentUser?.phone ? `• ${currentUser.phone}` : ''}
               </p>
             </div>
           </div>

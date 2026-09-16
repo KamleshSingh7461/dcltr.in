@@ -94,8 +94,13 @@ export function MarketplaceProvider({ children }) {
   });
 
   const [wishlist, setWishlist] = useState(() => {
+    const WISHLIST_VERSION = 'v2_clean';
+    const savedVer = localStorage.getItem('dcltr_wishlist_version');
     const saved = localStorage.getItem('dcltr_wishlist');
-    return saved ? JSON.parse(saved) : ['perf-1', 'perf-8'];
+    if (saved && savedVer === WISHLIST_VERSION) return JSON.parse(saved);
+    localStorage.removeItem('dcltr_wishlist');
+    localStorage.setItem('dcltr_wishlist_version', WISHLIST_VERSION);
+    return [];
   });
 
   const [offers, setOffers] = useState(() => {

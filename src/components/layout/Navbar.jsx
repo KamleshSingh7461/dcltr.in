@@ -41,6 +41,10 @@ export default function Navbar() {
   };
 
   const openAccount = (tab) => {
+    if (!isAuthenticated || !currentUser) {
+      setActivePage('login');
+      return;
+    }
     setAccountTab(tab);
     setActivePage('account');
   };

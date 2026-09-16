@@ -51,6 +51,9 @@ export default function SubdomainRouter({ children }) {
   }
 
   if (activePage === 'account') {
+    if (!isAuthenticated || !currentUser) {
+      return <BuyerAuthPage />;
+    }
     return <BuyerAccountPage />;
   }
 
