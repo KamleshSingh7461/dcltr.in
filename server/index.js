@@ -550,10 +550,11 @@ app.post('/api/auth/logout', (req, res) => {
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
   // Serve index.html for any client-side SPA route (non-API)
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(distPath, 'index.html'));
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api')) {
+      return res.sendFile(path.join(distPath, 'index.html'));
     }
+    next();
   });
 }
 
