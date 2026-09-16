@@ -425,20 +425,35 @@ app.get('/api/batch-check/:brand/:code', (req, res) => {
 let authUsers = [
   {
     id: 'usr-buyer-1',
-    name: 'Vikram Mehta',
-    email: 'collector@dcltr.in',
-    password: 'password123',
+    name: 'Vikram Mehta (Buyer)',
+    email: 'buyer1@dcltr.in',
+    password: 'BuyerPassword123',
     role: 'buyer',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150',
     kycStatus: 'verified',
     trustTier: 'Verified Buyer',
-    phone: '+91 98765 43210'
+    phone: '+91 98765 43210',
+    walletBalance: 25000,
+    escrowLocked: 0
+  },
+  {
+    id: 'usr-buyer-2',
+    name: 'Aarav Sharma (Buyer)',
+    email: 'buyer2@dcltr.in',
+    password: 'BuyerPassword123',
+    role: 'buyer',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150',
+    kycStatus: 'verified',
+    trustTier: 'Verified Buyer',
+    phone: '+91 91234 56789',
+    walletBalance: 15000,
+    escrowLocked: 0
   },
   {
     id: 'usr-seller-1',
     name: 'Jean-Paul Connoisseur',
     email: 'seller@dcltr.in',
-    password: 'password123',
+    password: 'SellerPassword123',
     role: 'seller',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
     kycStatus: 'verified',
@@ -447,14 +462,14 @@ let authUsers = [
     upiId: 'collector@okhdfcbank',
     salesCount: 14,
     rating: 4.95,
-    walletBalance: 355.2,
-    escrowLocked: 177.6
+    walletBalance: 42500,
+    escrowLocked: 12800
   },
   {
     id: 'usr-admin-1',
     name: 'Marketplace Owner / Master Admin',
     email: 'admin@dcltr.in',
-    password: 'adminpassword123',
+    password: 'AdminPassword123',
     role: 'admin',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
     kycStatus: 'verified',
